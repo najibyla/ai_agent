@@ -1,3 +1,3 @@
 - this is a simple ai agent using Google Gemini Api 
 - using the gemini-2.5-flash Model
-- this script can read files and directory and also write answers to files
+- this script can read files and directories and also write answers to files
