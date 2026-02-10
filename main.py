@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 from google import genai
 import argparse
 from google.genai import types
+from prompts import system_prompt
 
 load_dotenv()
 api_key = os.environ.get("GEMINI_API_KEY")
@@ -32,8 +33,10 @@ messages = [types.Content(role="user", parts=[types.Part(text=args.user_prompt)]
 
 #response = client.models.generate_content(model='gemini-2.5-flash',contents="Why is Boot.dev such a great place to learn backend development? Use one paragraph maximum.")
 #response = client.models.generate_content(model='gemini-2.5-flash',contents=args.user_prompt)
-response = client.models.generate_content(model='gemini-2.5-flash',contents=messages)
-
+response = client.models.generate_content(model='gemini-2.5-flash',
+                                          contents=messages,
+                                          config=types.GenerateContentConfig(system_instruction=system_prompt,temperature=0),)
+# temperature=0
 
 if response.usage_metadata.prompt_token_count is not None:
     prompt_token_count = response.usage_metadata.prompt_token_count
